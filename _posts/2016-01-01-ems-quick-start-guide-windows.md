@@ -20,7 +20,7 @@ The document also provide instructions for some basic features of the EMS such a
 
   - Extract the zip package
 
-  - Right click on `setup.exe` and **Run as administrator**
+  - Right-click on `setup.exe` then click **Run as administrator**
 
     ![qsgfw1.jpg]({{site.baseurl}}/assets/qsgfw1.jpg)
 
@@ -44,7 +44,7 @@ The document also provide instructions for some basic features of the EMS such a
 
     ![qsgfw6.jpg]({{site.baseurl}}/assets/qsgfw6.jpg)
 
-  - Verify installation, click **Next**
+  - Confirm installation, click **Install**
 
     ![qsgfw7.jpg]({{site.baseurl}}/assets/qsgfw7.jpg)
 

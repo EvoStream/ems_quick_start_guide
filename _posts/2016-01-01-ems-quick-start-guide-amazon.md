@@ -19,7 +19,6 @@ Amazon EC2 is a cloud-computing platform that virtualizes computing resources as
 ### Pre-requisites
 
 - Amazon Web Services Account
-- Amazon EC2 Account
 - Amazon EC2 Console Account
 
 
@@ -38,9 +37,10 @@ To get started with the EvoStream Media Server (EMS) on Amazon EC2 you will firs
    
    ![]({{site.baseurl}}/assets/image2.png)
    
-3. Select what type of EMS instance you will run:
-   
-   #### 1-Click Launch
+3. Select what type of EMS instance you will run: *(1-Click Launch or Manual Launch)*
+
+
+- **1-Click Launch**
 
 ![]({{site.baseurl}}/assets/image3.jpeg)
 
@@ -60,7 +60,7 @@ C.	Select or create the **VPC** to be used.
 
 ![]({{site.baseurl}}/assets/image6.jpeg)
 
-**Note:** See [*http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC\_Introduction.html*](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html) for more information on VPC.
+**Note:** See [**](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html)*http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC**_Introduction.html* for more information on VPC.
 
 D.	Choose a **Security Group**
 
@@ -93,7 +93,7 @@ F.	Review the settings created, click on **Launch with 1-Click**
 
 
 
-#### Manual Launch
+* **Manual Launch**
 
 ![]({{site.baseurl}}/assets/image10.jpeg)
 
@@ -121,13 +121,19 @@ While most work with the EMS happens at the command line or through the HTTP bas
 
 
 
-### Determining Public IP:
+### Determining Public IP
 
-1. In the Navigation pane of the EC2 Management Console, under Instances, click **Instances**.
+1. Sign in to *https://console.aws.amazon.com*
    
-2. Select the running instance.
+2. Click on the **EC2** under compute
    
-3. In the lower pane, click the **Description tab**. The Public DNS value is the public domain name of your running instance and the Instance ID is the instances instance ID.
+   ![]({{site.baseurl}}/assets/image23.jpeg)
+   
+3. In the Navigation pane of the EC2 Management Console, under Instances, click **Instances**.
+   
+4. Select the running instance.
+   
+5. In the lower pane, click the **Description tab**. The Public DNS value is the public domain name of your running instance and the Instance ID is the instances instance ID.
    
    ![]({{site.baseurl}}/assets/image13.jpeg)
 
@@ -137,14 +143,19 @@ While most work with the EMS happens at the command line or through the HTTP bas
 
 The Web UI is protected by default when using the EMS on AWS.  When accessing the Web UI you will be prompted for a username and password.
 
+![]({{site.baseurl}}/assets/authentication.jpeg)
+
 * Username: evostream
 * Password: "Amazon Instance ID" - this will need to be obtained via your Amazon account.
 
 
 
-Getting the Amazon Instance ID
+#### Getting the Amazon Instance ID
 
-1. Sign in to [*https://aws.amazon.com/*](https://aws.amazon.com/)
+- **From Amazon Console**
+
+
+1. Sign in to *https://console.aws.amazon.com*
    
 2. Click on the **EC2** under compute
    
@@ -157,6 +168,28 @@ Getting the Amazon Instance ID
 4. Click on the **Instance Name** provided for the EMS, and look for the **Instance ID** given.  This will be your password.
 
 ![]({{site.baseurl}}/assets/image25.jpeg)
+
+
+
+- **From Terminal**
+
+Enter command in the SSH terminal:
+
+``` 
+curl http://<Public_IP>/latest/meta-data/instance-id -w "\n"
+```
+
+**Example:**
+
+``` 
+curl http://52.91.237.115/latest/meta-data/instance-id -w "\n"
+```
+
+Response:
+
+``` 
+
+```
 
 
 
@@ -174,9 +207,18 @@ Connecting to your new instance via SSH is exactly the same as connecting to any
 
 1. Locate the .pem (key file)
    
-2. Send command: ssh –i ./&lt;evostream-keys.pem&gt; ubuntu@&lt;public\_IP&gt;
+2. Send command: ssh –i ./<evostream-keys.pem> ubuntu@<public\_IP>
    
-   **Note:** Public IP can be found on the Amazon instances
+   **Note:** Public IP can be found on the Amazon instances. See Determining Public IP.
+   
+   ``` 
+   test@ubuntu:~/Desktop$ ssh -i ./qakeys.pem ubuntu@52.91.237.115
+   The authenticity of host '52.91.237.115 (52.91.237.115)' can't be established.
+   ECDSA key fingerprint is ae:02:ee:41:ff:38:96:ab:78:7b:3a:e6:09:ed:1f:4c.
+   Are you sure you want to continue connecting (yes/no)? 
+   ```
+   
+3. Input "**yes**", press **Enter**
    
    ![]({{site.baseurl}}/assets/image13.jpeg)
    
@@ -190,18 +232,20 @@ Connecting to your new instance via SSH is exactly the same as connecting to any
    
    ``` 
    Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-46-generic x86_64)
-   
-   	Documentation:  https://help.ubuntu.com/
-    System information as of Wed Jan 20 09:11:53 UTC 2016
-    System load:  0.0               Processes:           106
-    Usage of /:   13.9% of 7.74GB   Users logged in:     1
-    Memory usage: 2%                IP address for eth0: 11.22.33.44.55
-    Swap usage:   0%
-    Graph this data and manage this system at:
-      https://landscape.canonical.com/
-    Get cloud support with Ubuntu Advantage Cloud Guest:
-      http://www.ubuntu.com/business/services/cloud
+      
+   	Documentation:  https://help.ubuntu.com/
+    System information as of Wed Jan 20 09:11:53 UTC 2016
+    System load:  0.0               Processes:           106
+    Usage of /:   13.9% of 7.74GB   Users logged in:     1
+    Memory usage: 2%                IP address for eth0: 11.22.33.44.55
+    Swap usage:   0%
+    Graph this data and manage this system at:
+      https://landscape.canonical.com/
+    Get cloud support with Ubuntu Advantage Cloud Guest:
+      http://www.ubuntu.com/business/services/cloud
    ```
+   
+   ​
    
    ​
 
@@ -240,9 +284,9 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
    
 5. Click **Save private key** and save the file with the name **\[key-pair-name\].ppk**.
 
-####  
+ 
 
-#### To connect via SSH:
+#### Connecting via SSH
 
 1. Run PuTTY
    
@@ -265,22 +309,28 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
 5. Click the **Browse** button to find and open the **\[key-pair-name\].ppk** file
    
    ![]({{site.baseurl}}/assets/image18.jpg)
-
-**Note:** If you will be opening this same session later, you can save it for future use.
-
-***To save the session information:***
-
-On the Basic options for your PuTTY Session page, enter a name for the session in Saved Sessions, and then click the **Save** button
-
-![]({{site.baseurl}}/assets/image19.jpg)
-
-1. Click on **SSH** under the Connection category
    
-2. Click the **Open** button to open the secure SSH session. The first time you connect to your instance, you'll get a PuTTY Security Alert that references the first use of **\[key-pair-name\].pem**
+   **Note:** If you will be opening this same session later, you can save it for future use
    
-3. Click **Yes** to accept the security key.
+   ***To save the session information:***
+   
+   On the Basic options for your PuTTY Session page, enter a name for the session in Saved Sessions, and then click the **Save** button
+   
+   ![]({{site.baseurl}}/assets/image19.jpg)
+   
+   ​
+   
+6. Click the **Open** button to open the secure SSH session. The first time you connect to your instance, you'll get a PuTTY Security Alert that references the first use of **\[key-pair-name\].pem**
+   
+7. Click **Yes** to accept the security key
    
    ![]({{site.baseurl}}/assets/image20.png)
+   
+8. Logged in as "**ubuntu**"
+   
+   ![]({{site.baseurl}}/assets/loggedin.jpeg)
+
+
 
 If you previously saved the SSH session information for this Amazon EC2 instance, do the following:
 
@@ -293,10 +343,16 @@ If you previously saved the SSH session information for this Amazon EC2 instance
    ![]({{site.baseurl}}/assets/image21.jpg)
    
 4. Click the **Open** button to open the secure SSH session.
-   
-   ![]({{site.baseurl}}/assets/image22.png)
 
-**Note:** You should see the login as: prompt in the SSH client window. Enter the Username and to login to your Amazon EC2 instance.
+**Note:** You should see the login as: prompt in the SSH client window. Enter "**ubuntu**" as the username 
+
+![]({{site.baseurl}}/assets/image22.png)
+
+![]({{site.baseurl}}/assets/loggedin.png)
+
+
+
+
 
 To end your SSH session, enter the exit command or press **CTRL+D**. You may have to do this twice if you're logged-in as the root user.
 
@@ -322,7 +378,7 @@ http://Username:Password@IPAddress:Port/apiproxy/CommandName?params=<base64Encod
 **Sample Command:** 
 
 ``` 
-http://evostream:i-48293048@52.91.237.115:8888/apiproxy/version
+http://evostream:i-013c03dc9bab9d69f@52.91.237.115:8888/apiproxy/version
 ```
 
 **Note:** username is “**evostream**” and password is the “**instance ID**”

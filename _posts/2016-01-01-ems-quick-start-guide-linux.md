@@ -110,7 +110,7 @@ There are two options for installing the license file: manual or via Web UI.
 Copy the License.lic to:
 
 - If via Linux Archive: `../config`
-- If via APT/YUM: `.. /etc/evostreamms/`
+- If via APT/YUM: `/etc/evostreamms/`
 
 
 

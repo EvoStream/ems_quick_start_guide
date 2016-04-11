@@ -132,7 +132,7 @@ Copy the License.lic to:
   # service evostreamms start_console
   ```
 
-2\. Open the EMS Web UI by pointing your browser to [http://localhost:8888/EMS_web_ui/index.php](http://localhost:8888/EMS_web_ui/index.php)
+2\. Open the EMS Web UI by pointing your browser to [http://localhost:8888/EMS_Web_UI/index.php](http://localhost:8888/EMS_Web_UI/index.php)
 
    ![gsgfl1.jpg]({{site.baseurl}}/assets/qsgfl1.jpg)
 

@@ -18,7 +18,7 @@ This document provides instructions on how to install EvoStream Media Server (EM
 
 There are two options for installing the EMS: Linux archive or apt/yum installation.
 
-### A.	Linux Archive Installation
+### A.	(Depricated) Linux Archive Installation
 
 1. Download the EMS tarball at [https://evostream.com/software-downloads](https://evostream.com/software-downloads)
 2. Extract the **.tar.gz** file to install the EMS at a directory of your choice.

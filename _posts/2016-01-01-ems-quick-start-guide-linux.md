@@ -20,7 +20,7 @@ There are two options for installing the EMS: Linux archive or apt/yum installat
 
 ### A.	(Depricated) Linux Archive Installation
 
-1. Download the EMS tarball at [Release 1.7.1 Archives](http://tarballs.evostream.com/release/4491/)
+1. Download the EMS tarball at the [Release 1.7.1 Archives](http://tarballs.evostream.com/release/4491/)
 2. Extract the **.tar.gz** file to install the EMS at a directory of your choice.
 
 

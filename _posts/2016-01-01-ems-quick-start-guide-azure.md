@@ -6,7 +6,6 @@ categories: jekyll update
 permalink: quick_start_guide_for_azure
 ---
 
-[TOC]
 
 ## Purpose
 

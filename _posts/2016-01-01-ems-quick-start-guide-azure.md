@@ -6,6 +6,7 @@ categories: jekyll update
 permalink: quick_start_guide_for_azure
 ---
 
+
 ## Purpose
 
 This document describes how to set up a virtual machine with EvoStream Media Server software on Microsoft Azure, an open, flexible, enterprise-grade cloud computing platform.
@@ -161,7 +162,7 @@ Click on the Virtual Machine name. Click on **Start**.
 
 #### Connecting via Remote Desktop
 
-1. Run the **Remote Desktop Connection** to be used
+1. Run the **Remote Desktop Application** to be used
    
    **Note:** The remote desktop application will depend on the OS you will use.
    

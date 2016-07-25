@@ -50,13 +50,9 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    
    ​
    
-3. Sign in your Microsoft Azure account if not yet signed in. You will be redirected to the EvoStream Media Server page.  Read on the notes and if ready, click on the **Create** button.
+3. **Sign in** your Microsoft Azure account if not yet signed in. You will be redirected to the EvoStream Media Server page.  Read on the notes and if ready, click on the **Create** button.
    
    ![]({{site.baseurl}}/assets/create_windows.JPG)
-   
-   ​
-   
-   ![]({{site.baseurl}}/assets/create_ubuntu.JPG)
    
    ​
    
@@ -66,7 +62,7 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    
 6. To check if the image has been created, on the Microsoft Azure Dashboard, click on the **Virtual machines**. You will now see the image created once the deployment succeeded.
 
-**Note:** The machine is started after the deployment.
+**Note:** The machine is started after the deployment
 
 
 
@@ -109,7 +105,7 @@ Click on the Virtual Machine name. Click on **Start**.
    
 3. Enter password, press **Enter**. A welcome note will open. You then need to **<u>install the license</u>** to be able to use the EMS capabilities.
 
-**Note:** The license should be placed in `/etc/evostreamms` for Linux and in `./config` in Windows.
+**Note:** The license should be placed in `/etc/evostreamms` for Linux and in `./config` in Windows
 
 
 
@@ -143,6 +139,8 @@ Click on the Virtual Machine name. Click on **Start**.
    
    **Connection type** – SSH
    
+   ​
+   
 4. Click **Open**
    
 5. Click  **Yes** to accept the security key on the PuTTy Security Alert Window
@@ -150,13 +148,13 @@ Click on the Virtual Machine name. Click on **Start**.
 6. Enter the username's password, hit **Enter**
    
    ``` 
-   Using usernmae "EvoStream".
+   Using username "EvoStream".
    EvoStream@111.221.105.202's password: 
    ```
    
 7. You are now connected to the machine! You then need to **<u>install the license</u>** to be able to use the EMS capabilities.
    
-   **Note:** The license should be placed in `/etc/evostreamms` for Linux and in `./config` in Windows.
+   **Note:** The license should be placed in `/etc/evostreamms` for Linux and in `./config` in Windows
    
    ​
 
@@ -164,9 +162,9 @@ Click on the Virtual Machine name. Click on **Start**.
 
 #### Connecting via Remote Desktop
 
-**Note:** Remote desktop can only be used for the Windows virtual machine image.
-
-1. Run **Remote Desktop Connection**
+1. Run the **Remote Desktop Application** to be used
+   
+   **Note:** The remote desktop application will depend on the OS you will use.
    
 2. Enter the details of the virtual machine image, click **Connect**
    
@@ -178,13 +176,99 @@ Click on the Virtual Machine name. Click on **Start**.
    
    ​
    
-3. Enter the password for the user, click **OK**
+3. Enter the **password** for the user, click **OK**
    
 4. The connection will be established. You may now **<u>install the license</u>** to use the EMS capabilities!
    
-   **Note:** The EMS is installed in `C:\EvoStream`.
+   **Note:** The EMS is installed in `C:\EvoStream`
    
    ​
+
+
+
+## EMS Web UI
+
+While most work with the EMS happens at the command line or through the HTTP based API calls, the EMS does have a Web UI that can be used. To access the UI simply point your browser at the proper URL: `http://<DomainOrPublicIP>:8888/EMS_Web_UI/index.php`
+
+< DomainOrPublicIP > will need to be replaced with the Public Domain or Public IP of your new EC2 Instance.
+
+
+
+### Determining Public IP
+
+1. Sign in to *http://portal.azure.com/*
+   
+2. Click on virtual machine created under Virtual Machines menu
+   
+3. Start the virtual machine
+   
+4. In the Essentials pane, the Public IP address/DNS name label is displayed
+   
+   **Note:** The IP address is changing everytime the virtual machine is restarted
+   
+   ![]({{site.baseurl}}/assets/IPinAzure.jpg)
+
+
+
+
+
+## Authentication
+
+The authentication is only enabled starting the 1.7.1 version of EMS. The Authentication is enabled by default in EMS Web UI and HTTP Based API.
+
+### Login for Web UI
+
+The Web UI is protected by default when using the EMS on Azure.  When accessing the Web UI you will be prompted for a username and password.
+
+![]({{site.baseurl}}/assets/authentication.JPG)
+
+- Username: evostream
+- Password: "UID" - the unique identifier of the virtual machine, this will be seen in webconfig.lua
+
+
+
+### HTTP Based API
+
+For the EMS on Azure, the HTTP based API is exposed, but it requires authentication to be used.  We call this **Proxy Authentication**. Basic Authentication is used and so just a username and password are required:
+
+- Username: evostream
+- Password: "UID" - the unique identifier of the virtual machine, this will be seen in webconfig.lua
+
+Command will take this general format:
+
+``` 
+http://Username:Password@IPAddress:Port/apiproxy/CommandName?params=<base64EncodedString>
+```
+
+**Sample Command:** 
+
+``` 
+http://evostream:i-D817E76F-B6F2-CC4F-ACAC-EAE9D84CEE3F@52.91.237.115:8888/apiproxy/version
+```
+
+**Note:** username is “**evostream**” and password is the “**UID**”
+
+See [Proxy Authentication](http://docs.evostream.com/ems_user_guide/runtimeapi#http) for more details.
+
+
+
+### Getting the Unique ID
+
+The UID will serves as the password for the Proxy and Web UI authentication. The UID is obtained once a virtual machine is made. It can only be checked in the EMS webconfig.lua.
+
+**in webconfig.lua:**
+
+``` 
+apiProxy=
+{
+   authentication="basic",
+   pseudoDomain="apiproxy",
+   address="127.0.0.1",
+   port=7777,
+   userName="evostream",
+   password="D817E76F-B6F2-CC4F-ACAC-EAE9D84CEE3F",   --> sample UID
+}
+```
 
 
 

@@ -29,6 +29,12 @@ Microsoft Azure is a cloud-computing platform that virtualizes computing resourc
 
 To get started with the EvoStream Media Server (EMS) on Azure, the first thing to do is to setup the virtual machine by simply following these steps:
 
+- _Quick-Deploy: Steps 1 and 2 below can be skipped by clicking one of the following buttons:_  
+  - _Quick-Deploy EvoStream Media Server 1.7.1 for Windows Server 2012 R2_  
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FEvoStream%2Fevostream_addons%2Fmaster%2Fazure_templates%2Fems171_windows2012%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+  - _Quick-Deploy EvoStream Media Server 1.7.1 for Ubuntu 14.04 64-bit_  
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FEvoStream%2Fevostream_addons%2Fmaster%2Fazure_templates%2Fems171_ubuntu1404%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+
 1. Search for the EvoStream Media Server in the Azure marketplace, or simply follow this link: 
    
    https://azure.microsoft.com/en-us/marketplace/partners/evostream-inc/evostream-media-server/

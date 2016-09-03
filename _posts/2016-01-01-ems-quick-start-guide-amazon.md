@@ -23,6 +23,16 @@ Amazon EC2 is a cloud-computing platform that virtualizes computing resources as
 
 
 
+### Free Trial
+
+EMS offers a 30-day free trial use for first-time customers.
+
+![]({{site.baseurl}}/assets/image12.png)
+
+**Note:** There will be no software changes but the AWS infrastructure charges still apply.
+
+
+
 ### Deployment
 
 To get started with the EvoStream Media Server (EMS) on Amazon EC2 you will first need to purchase an EMS instance through the Amazon Web Services website: [*https://aws.amazon.com/marketplace*](https://aws.amazon.com/marketplace)
@@ -31,7 +41,7 @@ To get started with the EvoStream Media Server (EMS) on Amazon EC2 you will firs
    
    [https://aws.amazon.com/marketplace/pp/B00VTR946Y](https://aws.amazon.com/marketplace/pp/B00VTR946Y)
    
-   ![]({{site.baseurl}}/assets/image1.jpeg)
+   ![]({{site.baseurl}}/assets/image1.JPG)
    
 2. Click **Continue** and **Sign in** your AWS account
    
@@ -48,23 +58,29 @@ The setup for the instance is made easy by the Amazon 1-click Launch utility and
 
 A.	Select the **Version** of the EMS to be used
 
-![]({{site.baseurl}}/assets/image4.jpeg)
+![]({{site.baseurl}}/assets/image4.JPG)
 
 B.	Select the **Region** and **EC2 Instance Type** (size of computer) for your deployment
 
-![]({{site.baseurl}}/assets/image5.jpeg)
+![]({{site.baseurl}}/assets/region.jpg)
+
+![]({{site.baseurl}}/assets/image5.jpg)
+
+
 
 **Note:** The EMS can be run on very small computers, including Micro EC2 instances. The size of the instance should be a direct reflection of how much sustained traffic you expect to be hosting. In almost all scenarios you will run out of bandwidth prior to exhausting the CPU or memory limits of the virtual machine.
 
-C.	Select or create the **VPC** to be used.
+C.	Select or create the **VPC** and **Subnet** to be used.
 
-![]({{site.baseurl}}/assets/image6.jpeg)
+![]({{site.baseurl}}/assets/image6.JPG)
 
-**Note:** See [**](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html)*http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC**_Introduction.html* for more information on VPC.
+
+
+**Note:** See [http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html) for more information on VPC.
 
 D.	Choose a **Security Group**
 
-![]({{site.baseurl}}/assets/image7.jpeg)
+![]({{site.baseurl}}/assets/image7.JPG)
 
 The default security group has been designed to provide outside access to all ports used for streaming. The ports are defined and used as follows:
 
@@ -83,7 +99,7 @@ These Security Settings can be changed but it will impact the accessibility of t
 
 E.	Choose or create a **Key Pair**
 
-![]({{site.baseurl}}/assets/image8.jpeg)
+![]({{site.baseurl}}/assets/image8.JPG)
 
 Either choose an existing key pair for instance access or create a new one for your account. If you choose an existing pair you **MUST** have the .pem file already downloaded from that pair. Amazon does not allow you to download key pairs a second time.
 
@@ -97,31 +113,85 @@ F.	Review the settings created, click on **Launch with 1-Click**
 
 ![]({{site.baseurl}}/assets/image10.jpeg)
 
-A.	Select the **EMS version** and click the **Launch with EC2 Console** of the chosen **Region**
+**Step 1: Choose AMI**
 
-![]({{site.baseurl}}/assets/image11.jpeg)
+A.	Select the **EMS version** to be used
 
-​
+![]({{site.baseurl}}/assets/image11.JPG)
 
-### Free Trial
+B.	Click the **Launch with EC2 Console** of the chosen **Region**
 
-EMS offers a 30-day free trial use for first-time customers.
-
-![]({{site.baseurl}}/assets/image12.png)
-
-**Note:** There will be no software changes but the AWS infrastructure charges still apply.
+![]({{site.baseurl}}/assets/region_man.JPG)
 
 
 
-## EMS Web UI
+**Step 2: Choose Instance Type**
+
+You will now be redirected to the **Launch Instance Wizard in Step 2**. You may launch or with continue the configuration of the image.
+
+C.	Select the **Instance Type** to be used. You may **Review and Launch** the AMI or click **Next** to continue with the configuration
+
+![]({{site.baseurl}}/assets/instancetype.JPG)
+
+
+
+**Step 3: Configure Instance Details**
+
+D.	Configure the instance to suit your requirements. You may **Review and Launch** the AMI or click **Next** to continue with the configuration
+
+![]({{site.baseurl}}/assets/instance.JPG)
+
+
+
+**Step 4: Add Storage**
+
+E.	**Add New Volume** or you may **Review and Launch** the AMI or click **Next** to continue with the configuration
+
+![]({{site.baseurl}}/assets/volume.JPG)
+
+
+
+F.	Add a tag for the instance or you may **Review and Launch** the AMI or click **Next** to continue with the configuration
+
+![]({{site.baseurl}}/assets/tag.JPG)
+
+
+
+G.	**Create** or **select** the **security group** to be used then click **Review and Launch**
+
+![]({{site.baseurl}}/assets/securitygroup.JPG)
+
+
+
+**Step 7: Review and Launch**
+
+H.	Review the configuration made, click **Launch** or go back to modify the changes
+
+![]({{site.baseurl}}/assets/review.JPG)
+
+
+
+I.	A window for the keys will prompt. Select an existing key pair or create or proceed without the key pair to be used. Click **Launch instances**
+
+![]({{site.baseurl}}/assets/keypair.jpg)
+
+
+
+Note: You will find the instance created in Instances under Instances Menu
+
+
+
+## Connecting to EMS using Windows
+
+### A.	EMS Web UI
 
 While most work with the EMS happens at the command line or through the HTTP based API calls, the EMS does have a Web UI that can be used. To access the UI simply point your browser at the proper URL: `http://<DomainOrPublicIP>:8888/EMS_Web_UI/index.php`
 
-< DomainOrPublicIP > will need to be replaced with the Public Domain or Public IP of your new EC2 Instance.
+**< DomainOrPublicIP >** will need to be replaced with the Public Domain or Public IP of your new EC2 Instance.
 
 
 
-### Determining Public IP
+#### A.1.	Determining Public IP
 
 1. Sign in to *https://console.aws.amazon.com*
    
@@ -139,7 +209,7 @@ While most work with the EMS happens at the command line or through the HTTP bas
 
 
 
-### Login for Web UI
+#### A.2.	Login for Web UI
 
 The Web UI is protected by default when using the EMS on AWS.  When accessing the Web UI you will be prompted for a username and password.
 
@@ -150,7 +220,7 @@ The Web UI is protected by default when using the EMS on AWS.  When accessing th
 
 
 
-#### Getting the Amazon Instance ID
+**Getting the Amazon Instance ID**
 
 - **From Amazon Console**
 
@@ -171,82 +241,38 @@ The Web UI is protected by default when using the EMS on AWS.  When accessing th
 
 
 
-- **From Terminal**
+### B.	Remote Desktop Connection
 
-Enter command in the SSH terminal:
-
-``` 
-curl http://<Public_IP>/latest/meta-data/instance-id -w "\n"
-```
-
-**Example:**
-
-``` 
-curl http://52.91.237.115/latest/meta-data/instance-id -w "\n"
-```
-
-Response:
-
-``` 
-i-013c03dc9bab9d69f
-```
-The instance ID of the running instance will be shown.
-
-
-## Advanced Connection to the EMS
-
-Connecting to the EMS via the command line unlocks a world of functionality not accessible through the UI.  You can read much more about the EMS API and its capabilities here:  [EMS User's Guide](http://docs.evostream.com/ems_user_guide/table_of_contents)
-
-The following instructions will help you get connected via the command line to your new Amazon Marketplace instance.
-
-
-
-### Connecting via SSH from Linux Terminal
-
-Connecting to your new instance via SSH is exactly the same as connecting to any Linux EC2 computer. You will access it using the “ubuntu” user and use the .pem key you chose during Instance setup.
-
-1. Locate the .pem (key file) in the terminal
+1. Run the **Remote Desktop Application**
    
-2. Send command: `ssh –i ./<evostream-keys.pem> ubuntu@<public_IP>`
+2. Enter the details of the virtual machine image, click **Connect**
    
-   **Note:** Public IP can be found on the Amazon instances. See Determining Public IP.
+   **Computer** - the IP address of the image
    
-   ``` 
-   test@ubuntu:~/Desktop$ ssh -i ./qakeys.pem ubuntu@52.91.237.115
-   The authenticity of host '52.91.237.115 (52.91.237.115)' can't be established.
-   ECDSA key fingerprint is ae:02:ee:41:ff:38:96:ab:78:7b:3a:e6:09:ed:1f:4c.
-   Are you sure you want to continue connecting (yes/no)? 
-   ```
+   **Username** -??
    
-3. Input "**yes**", press **Enter**
+   **Password**- ??
+   
+   ​
+   
+3. Enter the **password** for the user, click **OK**
+   
+4. The connection will be established. You can now use the EMS capabilities!
 
-   ``` 
-   Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-46-generic x86_64)
-      
-   	Documentation:  https://help.ubuntu.com/
-    System information as of Wed Jan 20 09:11:53 UTC 2016
-    System load:  0.0               Processes:           106
-    Usage of /:   13.9% of 7.74GB   Users logged in:     1
-    Memory usage: 2%                IP address for eth0: 11.22.33.44.55
-    Swap usage:   0%
-    Graph this data and manage this system at:
-      https://landscape.canonical.com/
-    Get cloud support with Ubuntu Advantage Cloud Guest:
-      http://www.ubuntu.com/business/services/cloud
-   ```
-   
-   
+**Note:** The EMS is installed in `C:\EvoStream`
 
-### Connecting via SSH from Windows (Putty)
 
-#### Pre-requisites
+
+### C.	PuTTy
+
+#### C.1.	Pre-requisites
 
 - PuTTY Generator
 - PuTTY Secure Shell Client
 
 
 
-#### Key File Conversion
+#### C.2.	Key File Conversion
 
 EvoStream Media Server configuration can be accomplished using SSH and a client. Public AMI instances use a public/private key pair to log in instead of a password. The public key half of this pair is embedded in your instance, allowing you to use the private key half to log in securely without a password.
 
@@ -272,11 +298,11 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
    
 5. Click **Save private key** and save the file with the name **\[key-pair-name\].ppk**.
 
- 
 
-#### Connecting via SSH
 
-1. Run PuTTY
+#### C.3.	Connecting via SSH
+
+1. Run **PuTTY**
    
 2. Select **Session** under the category tree
    
@@ -292,7 +318,7 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
    
    **Connection type** – SSH
    
-4. Select **Auth** under **Connection &gt; SSH** in category tree
+4. Select **Auth** under **Connection > SSH** in category tree
    
 5. Click the **Browse** button to find and open the **\[key-pair-name\].ppk** file
    
@@ -305,16 +331,16 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
    On the Basic options for your PuTTY Session page, enter a name for the session in Saved Sessions, and then click the **Save** button
    
    ![]({{site.baseurl}}/assets/image19.jpg)
+
+
+
+1. Click the **Open** button to open the secure SSH session. The first time you connect to your instance, you'll get a PuTTY Security Alert that references the first use of **\[key-pair-name\].pem**
    
-   
-   
-6. Click the **Open** button to open the secure SSH session. The first time you connect to your instance, you'll get a PuTTY Security Alert that references the first use of **\[key-pair-name\].pem**
-   
-7. Click **Yes** to accept the security key
+2. Click **Yes** to accept the security key
    
    ![]({{site.baseurl}}/assets/image20.png)
    
-8. Logged in as "**ubuntu**"
+3. Logged in as "**ubuntu**"
    
    ![]({{site.baseurl}}/assets/loggedin.JPG)
 
@@ -322,7 +348,7 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
 
 If you previously saved the SSH session information for this Amazon EC2 instance, do the following:
 
-1. Run PuTTY
+1. Run **PuTTY**
    
 2. Select **Session** in the category tree
    
@@ -340,9 +366,128 @@ If you previously saved the SSH session information for this Amazon EC2 instance
 
 
 
-
-
 To end your SSH session, enter the exit command or press **CTRL+D**. You may have to do this twice if you're logged-in as the root user.
+
+
+
+
+
+## Connecting to EMS using Linux
+
+### A.	EMS Web UI
+
+While most work with the EMS happens at the command line or through the HTTP based API calls, the EMS does have a Web UI that can be used. To access the UI simply point your browser at the proper URL: `http://<DomainOrPublicIP>:8888/EMS_Web_UI/index.php`
+
+**< DomainOrPublicIP >** will need to be replaced with the Public Domain or Public IP of your new EC2 Instance.
+
+
+
+#### A.1.	Determining Public IP
+
+1. Sign in to *https://console.aws.amazon.com*
+   
+2. Click on the **EC2** under compute
+   
+   ![]({{site.baseurl}}/assets/image23.jpeg)
+   
+3. In the Navigation pane of the EC2 Management Console, under Instances, click **Instances**.
+   
+4. Select the running instance.
+   
+5. In the lower pane, click the **Description tab**. The Public DNS value is the public domain name of your running instance and the Instance ID is the instances instance ID.
+   
+   ![]({{site.baseurl}}/assets/image13.jpeg)
+
+
+
+#### A.2.	Login for Web UI
+
+The Web UI is protected by default when using the EMS on AWS.  When accessing the Web UI you will be prompted for a username and password.
+
+![]({{site.baseurl}}/assets/authentication.JPG)
+
+- Username: evostream
+- Password: "Amazon Instance ID" - this will need to be obtained via your Amazon account.
+
+
+
+**Getting the Amazon Instance ID**
+
+- **From Amazon Console**
+
+
+1. Sign in to *https://console.aws.amazon.com*
+   
+2. Click on the **EC2** under compute
+   
+   ![]({{site.baseurl}}/assets/image23.jpeg)
+   
+3. Click on **Running Instances** under Resources
+   
+   ![]({{site.baseurl}}/assets/image24.jpeg)
+   
+4. Click on the **Instance Name** provided for the EMS, and look for the **Instance ID** given.  This will be your password.
+
+![]({{site.baseurl}}/assets/image25.jpeg)
+
+- **From Terminal**
+
+Enter command in the SSH terminal:
+
+``` 
+curl http://<Public_IP>/latest/meta-data/instance-id -w "\n"
+```
+
+**Example:**
+
+``` 
+curl http://52.91.237.115/latest/meta-data/instance-id -w "\n"
+```
+
+**Sample Response:**
+
+``` 
+i-013c03dc9bab9d69f
+```
+
+The instance ID of the running instance will be shown.
+
+
+
+### B.	SSH via Terminal
+
+Connecting to your new instance via SSH is exactly the same as connecting to any Linux EC2 computer. You will access it using the “ubuntu” user and use the .pem key you chose during Instance setup.
+
+1. Locate the .pem (key file) in the terminal
+   
+2. Send command: `ssh –i ./<evostream-keys.pem> ubuntu@<public_IP>`
+   
+   **Note:** Public IP can be found on the Amazon instances. See Determining Public IP.
+   
+   ``` 
+   test@ubuntu:~/Desktop$ ssh -i ./evostream-keys.pem ubuntu@52.91.237.115
+   The authenticity of host '52.91.237.115 (52.91.237.115)' can't be established.
+   ECDSA key fingerprint is ae:02:ee:41:ff:38:96:ab:78:7b:3a:e6:09:ed:1f:4c.
+   Are you sure you want to continue connecting (yes/no)? 
+   ```
+   
+3. Input "**yes**", press **Enter**
+   
+   ``` 
+   Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-46-generic x86_64)
+   
+   	Documentation:  https://help.ubuntu.com/
+    System information as of Wed Jan 20 09:11:53 UTC 2016
+    System load:  0.0               Processes:           106
+    Usage of /:   13.9% of 7.74GB   Users logged in:     1
+    Memory usage: 2%                IP address for eth0: 11.22.33.44.55
+    Swap usage:   0%
+    Graph this data and manage this system at:
+      https://landscape.canonical.com/
+    Get cloud support with Ubuntu Advantage Cloud Guest:
+      http://www.ubuntu.com/business/services/cloud
+   ```
+
 
 
 
@@ -370,7 +515,7 @@ http://evostream:i-013c03dc9bab9d69f@52.91.237.115:8888/apiproxy/version
 
 **Note:** username is “**evostream**” and password is the “**instance ID**”
 
-See <http://docs.evostream.com/ems_user_guide/runtimeapi#http> for more details.
+See [http://docs.evostream.com/ems_user_guide/runtimeapi#http](http://docs.evostream.com/ems_user_guide/runtimeapi#http) for more details.
 
 
 

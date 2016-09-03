@@ -249,9 +249,25 @@ The Web UI is protected by default when using the EMS on AWS.  When accessing th
    
    **Computer** - the IP address of the image
    
-   **Username** -??
+   **Username** -Administrator
    
-   **Password**- ??
+   **Password**- *see below*
+   
+   ​
+   
+   2.1.	How to obtain the password?
+   
+   To get the password, right click on the instance under the Instances list. Click **Connect** and you will be prompted with this:
+   
+   ![]({{site.baseurl}}/assets/password.jpg)
+   
+   ​
+   
+   Click on **Get Password**. Choose the **[key-pair-name\].pem** then click **Decrypt Password**. 
+   
+   A **password** will be shown on the window.
+   
+   ![]({{site.baseurl}}/assets/decrypt.JPG)
    
    ​
    

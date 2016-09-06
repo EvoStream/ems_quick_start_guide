@@ -121,6 +121,7 @@ F.	Review the settings created, click on **Launch with 1-Click**
 
 
 
+
 * **Manual Launch**
 
 ![]({{site.baseurl}}/assets/image10.jpeg)
@@ -193,13 +194,51 @@ Note: You will find the instance created in Instances under Instances Menu
 
 
 
+
 ## Connecting to EMS using Windows
 
-### A.	EMS Web UI
+### A.	Remote Desktop Connection
+
+1. Run the **Remote Desktop Application**
+   
+2. Enter the details of the virtual machine image, click **Connect**
+   
+   **Computer** - the IP address of the image
+   
+   **Username** -Administrator
+   
+   **Password**- *see below*
+   
+   2.1.	How to obtain the password?
+   
+   To get the password, right click on the instance under the Instances list. Click **Connect** and you will be prompted with this:
+   
+   ![]({{site.baseurl}}/assets/password.jpg)
+   
+   
+   Click on **Get Password**. Choose the **[key-pair-name\].pem** then click **Decrypt Password**. 
+   
+   A **password** will be shown on the window.
+   
+   ![]({{site.baseurl}}/assets/decrypt.JPG)
+   
+
+   
+3. Enter the **password** for the user, click **OK**
+   
+4. The connection will be established.Run EMS by double clicking the desktop shortcut icon or running the `run_console_ems.bat`. You can now use the EMS capabilities!
+
+**Note:** The EMS is installed in `C:\EvoStream`.
+
+
+
+### B.	EMS Web UI
 
 While most work with the EMS happens at the command line or through the HTTP based API calls, the EMS does have a Web UI that can be used. To access the UI simply point your browser at the proper URL: `http://<DomainOrPublicIP>:8888/EMS_Web_UI/index.php`
 
 **< DomainOrPublicIP >** will need to be replaced with the Public Domain or Public IP of your new EC2 Instance.
+
+**Note:** EMS should be running to be able to access the EMS Web UI.
 
 
 
@@ -253,126 +292,13 @@ The Web UI is protected by default when using the EMS on AWS.  When accessing th
 
 
 
-### B.	Remote Desktop Connection
-
-1. Run the **Remote Desktop Application**
-   
-2. Enter the details of the virtual machine image, click **Connect**
-   
-   **Computer** - the IP address of the image
-   
-   **Username** -Administrator
-   
-   **Password**- *see below*
-   
-   ​
-   
-   2.1.	How to obtain the password?
-   
-   To get the password, right click on the instance under the Instances list. Click **Connect** and you will be prompted with this:
-   
-   ![]({{site.baseurl}}/assets/password.jpg)
-   
-   ​
-   
-   Click on **Get Password**. Choose the **[key-pair-name\].pem** then click **Decrypt Password**. 
-   
-   A **password** will be shown on the window.
-   
-   ![]({{site.baseurl}}/assets/decrypt.JPG)
-   
-   ​
-   
-3. Enter the **password** for the user, click **OK**
-   
-4. The connection will be established. You can now use the EMS capabilities!
-
-**Note:** The EMS is installed in `C:\EvoStream`
-
 
 ## Connecting to EMS using Linux
 
-### A.	EMS Web UI
-
-While most work with the EMS happens at the command line or through the HTTP based API calls, the EMS does have a Web UI that can be used. To access the UI simply point your browser at the proper URL: `http://<DomainOrPublicIP>:8888/EMS_Web_UI/index.php`
-
-**< DomainOrPublicIP >** will need to be replaced with the Public Domain or Public IP of your new EC2 Instance.
+**Note:** EMS is already running in Linux instance.
 
 
-
-#### A.1.	Determining Public IP
-
-1. Sign in to *https://console.aws.amazon.com*
-   
-2. Click on the **EC2** under compute
-   
-   ![]({{site.baseurl}}/assets/image23.jpeg)
-   
-3. In the Navigation pane of the EC2 Management Console, under Instances, click **Instances**.
-   
-4. Select the running instance.
-   
-5. In the lower pane, click the **Description tab**. The Public DNS value is the public domain name of your running instance and the Instance ID is the instances instance ID.
-   
-   ![]({{site.baseurl}}/assets/image13.jpeg)
-
-
-
-#### A.2.	Login for Web UI
-
-The Web UI is protected by default when using the EMS on AWS.  When accessing the Web UI you will be prompted for a username and password.
-
-![]({{site.baseurl}}/assets/authentication.JPG)
-
-- Username: evostream
-- Password: "Amazon Instance ID" - this will need to be obtained via your Amazon account.
-
-
-
-**Getting the Amazon Instance ID**
-
-- **From Amazon Console**
-
-
-1. Sign in to *https://console.aws.amazon.com*
-   
-2. Click on the **EC2** under compute
-   
-   ![]({{site.baseurl}}/assets/image23.jpeg)
-   
-3. Click on **Running Instances** under Resources
-   
-   ![]({{site.baseurl}}/assets/image24.jpeg)
-   
-4. Click on the **Instance Name** provided for the EMS, and look for the **Instance ID** given.  This will be your password.
-
-![]({{site.baseurl}}/assets/image25.jpeg)
-
-- **From Terminal**
-
-Enter command in the SSH terminal:
-
-``` 
-curl http://<Public_IP>/latest/meta-data/instance-id -w "\n"
-```
-
-**Example:**
-
-``` 
-curl http://52.91.237.115/latest/meta-data/instance-id -w "\n"
-```
-
-**Sample Response:**
-
-``` 
-i-013c03dc9bab9d69f
-```
-
-The instance ID of the running instance will be shown.
-
-
-
-### B.	SSH via Terminal
+### A.	SSH via Terminal
 
 Connecting to your new instance via SSH is exactly the same as connecting to any Linux EC2 computer. You will access it using the “ubuntu” user and use the .pem key you chose during Instance setup.
 
@@ -407,16 +333,16 @@ Connecting to your new instance via SSH is exactly the same as connecting to any
    ```
 
 
-### C.	Windows PuTTy
+### B.	Windows PuTTy
 
-#### C.1.	Pre-requisites
+#### B.1.	Pre-requisites
 
 - PuTTY Generator
 - PuTTY Secure Shell Client
 
 
 
-#### C.2.	Key File Conversion
+#### B.2.	Key File Conversion
 
 EvoStream Media Server configuration can be accomplished using SSH and a client. Public AMI instances use a public/private key pair to log in instead of a password. The public key half of this pair is embedded in your instance, allowing you to use the private key half to log in securely without a password.
 
@@ -444,7 +370,7 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
 
 
 
-#### C.3.	Connecting via SSH
+#### B.3.	Connecting via SSH
 
 1. Run **PuTTY**
    
@@ -511,6 +437,85 @@ If you previously saved the SSH session information for this Amazon EC2 instance
 
 
 To end your SSH session, enter the exit command or press **CTRL+D**. You may have to do this twice if you're logged-in as the root user.
+
+### C.	EMS Web UI
+
+While most work with the EMS happens at the command line or through the HTTP based API calls, the EMS does have a Web UI that can be used. To access the UI simply point your browser at the proper URL: `http://<DomainOrPublicIP>:8888/EMS_Web_UI/index.php`
+
+**< DomainOrPublicIP >** will need to be replaced with the Public Domain or Public IP of your new EC2 Instance.
+
+
+
+#### C.1.	Determining Public IP
+
+1. Sign in to *https://console.aws.amazon.com*
+   
+2. Click on the **EC2** under compute
+   
+   ![]({{site.baseurl}}/assets/image23.jpeg)
+   
+3. In the Navigation pane of the EC2 Management Console, under Instances, click **Instances**.
+   
+4. Select the running instance.
+   
+5. In the lower pane, click the **Description tab**. The Public DNS value is the public domain name of your running instance and the Instance ID is the instances instance ID.
+   
+   ![]({{site.baseurl}}/assets/image13.jpeg)
+
+
+
+#### C.2.	Login for Web UI
+
+The Web UI is protected by default when using the EMS on AWS.  When accessing the Web UI you will be prompted for a username and password.
+
+![]({{site.baseurl}}/assets/authentication.JPG)
+
+- Username: evostream
+- Password: "Amazon Instance ID" - this will need to be obtained via your Amazon account.
+
+
+
+**Getting the Amazon Instance ID**
+
+- **From Amazon Console**
+
+
+1. Sign in to *https://console.aws.amazon.com*
+   
+2. Click on the **EC2** under compute
+   
+   ![]({{site.baseurl}}/assets/image23.jpeg)
+   
+3. Click on **Running Instances** under Resources
+   
+   ![]({{site.baseurl}}/assets/image24.jpeg)
+   
+4. Click on the **Instance Name** provided for the EMS, and look for the **Instance ID** given.  This will be your password.
+
+![]({{site.baseurl}}/assets/image25.jpeg)
+
+- **From Terminal**
+
+Enter command in the SSH terminal:
+
+``` 
+curl http://<Public_IP>/latest/meta-data/instance-id -w "\n"
+```
+
+**Example:**
+
+``` 
+curl http://52.91.237.115/latest/meta-data/instance-id -w "\n"
+```
+
+**Sample Response:**
+
+``` 
+i-013c03dc9bab9d69f
+```
+
+The instance ID of the running instance will be shown.
+
 
 
 ## HTTP Based API

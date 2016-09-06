@@ -242,7 +242,7 @@ While most work with the EMS happens at the command line or through the HTTP bas
 
 
 
-#### A.1.	Determining Public IP
+#### B.1.	Determining Public IP
 
 1. Sign in to *https://console.aws.amazon.com*
    
@@ -260,7 +260,7 @@ While most work with the EMS happens at the command line or through the HTTP bas
 
 
 
-#### A.2.	Login for Web UI
+#### B.2.	Login for Web UI
 
 The Web UI is protected by default when using the EMS on AWS.  When accessing the Web UI you will be prompted for a username and password.
 

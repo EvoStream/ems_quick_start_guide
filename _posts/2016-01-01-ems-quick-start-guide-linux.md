@@ -102,6 +102,7 @@ Steps 2 and 3 must be executed only once
 
 
 ## License Installation
+**Note:** You should already have your license file available. If none, EvoStream offers a 30-day free trial license to those who want to explore the features of EMS. Click [here](https://evostream.com/free-trial/) to avail the free trial or contact [salesupport@evostream](salesupport@evostream) for other license type purchase.
 
 There are two options for installing the license file: manual or via Web UI.
 

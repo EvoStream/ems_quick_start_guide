@@ -41,8 +41,6 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
    https://azure.microsoft.com/en-us/marketplace/partners/evostream-inc/evostream-media-server/
 
-   ![]({{site.baseURL}}/assets/homepage.JPG)
-
    ​
 
 2. Select the operating system for the virtual machine to be created. Click on **Create Virtual Machine** button.
@@ -89,15 +87,11 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
    1 Edge (with two instances)
 
+    **SM, Origin, Edge VM:**
+    ![]({{site.baseurl}}/assets/albset.JPG)
 
-​	![]({{site.baseurl}}/assets/albset.JPG)
-
-
-​		Edge instances:
-
-
-​		![]({{site.baseurl}}/assets/albege.JPG)
-
+    **Edge instances:**
+    ![]({{site.baseurl}}/assets/albedge.JPG)
 
 
 **Note:** The machines are started after the deployment
@@ -152,7 +146,7 @@ When creating a machine with load balancer, three machines are actualy created. 
 
 All the virtual machines in your account is seen under the Virtual machines in the left-side menu bar. 
 
-Note: All VMs are started after creation.
+**Note:** All VMs are started after creation.
 
 If your machine is turned off, manually start the set of VMs; SM, Origin, Edge in your resource group.
 
@@ -294,7 +288,7 @@ Deleting the EMS virtual machine will remove all the changes and the virtual mac
 3. or, simply click **Delete** on the virtual machine window
 4. Choose if you want to delete or keep the attached disk
 
-​	![]({{site.baseurl}}/assets/albdeleteVM.jpg)
+​	![]({{site.baseurl}}/assets/albdelete.jpg)
 
 
 

@@ -238,23 +238,10 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
    **Note:** The license is already installed and is placed in `/etc/evostreamms` for Linux.
 
-   ​
-
 
 ## Load Balancing
 
-Azure Load Balancer delivers high availability and network performance to your applications. It is a Layer 4 (TCP, UDP) load balancer that distributes incoming traffic among healthy instances of services defined in a load-balanced set.[+](undefined)
-
-Azure Load Balancer can be configured to:
-
-- Load balance incoming Internet traffic to virtual machines. This configuration is known as Internet-facing load balancing.
-- Load balance traffic between virtual machines in a virtual network, between virtual machines in cloud services, or between on-premises computers and virtual machines in a cross-premises virtual network. This configuration is known as internal load balancing.
-- Forward external traffic to a specific virtual machine.
-
-All resources in the cloud need a public IP address to be reachable from the Internet. The cloud infrastructure in Azure uses non-routable IP addresses for its resources. Azure uses network address translation (NAT) with public IP addresses to communicate to the Internet.
-
-See more [here](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview#load-balancer-features).
-
+Azure Load Balancer delivers high availability and network performance to EMS Edge servers. It distributes outbound traffic among healthy instances of Edge servers defined in a load-balanced scale set.
 
 
 ## Terminating EMS machine

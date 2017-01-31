@@ -15,7 +15,7 @@ This template will provide you with a flexible an scalable Origin-Edge distribut
 
 A Stream Manager virtual machine is used to manage the distributions of streams between origin and edge.
 
-![]({{site.baseURL}}/assets/azure.png)
+![]({{site.baseURL}}/assets/azure.JPG)
 
 
 
@@ -73,8 +73,6 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    - HTTP password
    - Confirm password
 
-   ​
-
 4. Review the Settings, Offer Details and Terms of Use then click **Purchase** to start the deployment
 
 5. To check if the image has been created, on the Microsoft Azure Dashboard, click on the **Virtual machines**. You will now see the image created once the deployment succeeded.
@@ -87,11 +85,12 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
    1 Edge (with two instances)
 
-    **SM, Origin, Edge VM:**
-    ![]({{site.baseurl}}/assets/albset.JPG)
+   | Virtual Machine              | List in Resource Group                   |
+   | ---------------------------- | ---------------------------------------- |
+   | Stream Manager, Origin, Edge | ![]({{site.baseurl}}/assets/albset.JPG)  |
+   | Edge instances               | ![]({{site.baseurl}}/assets/albedge.JPG) |
 
-    **Edge instances:**
-    ![]({{site.baseurl}}/assets/albedge.JPG)
+   ​
 
 
 **Note:** The machines are started after the deployment
@@ -104,39 +103,39 @@ When creating a machine with load balancer, three machines are actualy created. 
 
 **A. Stream Manager**
 
-​	- Maintains a map of active Origin and Edges
+- Maintains a map of active Origin and Edges
 
-​	- Detects ingest events at Origin to trigger stream replication at Edges
-
-​		- Pulls streams to Edges when Origin ingests new streams
-
-​		- Updates configuration when VM creation event detected
-
-​		- Updates configuration when Server Started event detected
-
-​		- Pings Origin & Edges regularly to update configuration
+- Detects ingest events at Origin to trigger stream replication at Edges
+  - Pulls streams to Edges when Origin ingests new streams
+  - Updates configuration when VM creation event detected
+  - Updates configuration when Server Started event detected
+  - Pings Origin & Edges regularly to update configuration
 
 **B. Origin Server**
 
-​	- Ingests streams from Source Clients
+- Ingests streams from Source Clients
 
-​	- Requests SM to replicate ingested streams to Edges
+- Requests SM to replicate ingested streams to Edges
 
-​	- Registers to NLM on VM creation
+- Registers to NLM on VM creation
+
 
 **C. Edge Server**
 
-​	- Replicate (pull) streams ingested by Origin
+- Replicate (pull) streams ingested by Origin
 
-​	- Register to NLM on VM creation
+- Register to NLM on VM creation
+
 
 **D. Load Balancer**
 
-​	- Distributes load among Edges
+- Distributes load among Edges
+
 
 **E. Auto-Scaler**
 
-​	- Automatically scales Edges based on bandwidth usage
+- Automatically scales Edges based on bandwidth usage
+
 
 
 
@@ -154,7 +153,7 @@ If your machine is turned off, manually start the set of VMs; SM, Origin, Edge i
 
 
 
-To start anything for your project, what you need to access is the <u>Origin Server</u>. An EMS is installed in this server. From here, you can pull your streams and the Stream Manager will do the replication of the streams to the Edge Servers. The Edge Servers will be accessed by clients when a request is sent for streaming.
+To start anything for your project, what you need to access is the <u>Origin Server</u>. An EMS is installed in this server. From here, you can pull your streams and the Stream Manager will do the replication of the streams to the Edge Servers. The Edge Servers will be accessed by clients when a request is sent for streaming. 
 
 
 
@@ -185,11 +184,9 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 3. Enter password, press **Enter**. A welcome note will open.
 
-​	![]({{site.baseurl}}/assets/loggedin.JPG)
+   ​![]({{site.baseurl}}/assets/loggedin.JPG)
 
 **Note:** The license is already installed and is placed in `/etc/evostreamms` for Linux.
-
-
 
 
 
@@ -239,9 +236,27 @@ To start anything for your project, what you need to access is the <u>Origin Ser
    **Note:** The license is already installed and is placed in `/etc/evostreamms` for Linux.
 
 
+
+
 ## Load Balancing
 
 Azure Load Balancer delivers high availability and network performance to EMS Edge servers. It distributes outbound traffic among healthy instances of Edge servers defined in a load-balanced scale set.
+
+![]({{site.baseurl}}/assets/albems.jpg)	
+
+The Azure Load Balancer (or ALB) consists of an **Ingest** side, a **Delivery** side, and a **Stream Manager**.
+
+The Ingest side consists of an Origin server (a Virtual Machine or VM with EMS). The Delivery side consists of a variable number of Edge servers (VMs with EMS) that are part of a Virtual Machine Scale Set (VMSS). The Scale Set is equipped with an **Auto Scaler** to increase or decrease the number of Edge VMs depending on the total outbound bandwidth. The Scale Set uses a **Load Balancer** to distribute the load among the Edge VMs. The Stream Manager (SM) coordinates all streaming activities at the Origin and Edge servers.
+
+At the Ingest side, when a stream is ingested by the Origin server, the Stream Manager will be notified of a stream creation event. The SM will then ask each Edge server (each instance in the Scale Set) to pull the stream from the Origin server as an RTMP stream.
+At the Delivery side, when a client plays or pulls a stream, the Load Balancer randomly selects an available Edge server in the Scale Set to serve the requested stream to the client.
+
+As more clients consume streams, the outbound bandwidth reaches a threshold at which the Autoscaler will add a new instance (an Edge VM) to the Scale Set. This is called scaling out. There is a maximum number of instances in the Scale Set (currently 5). The maximum bandwidth capacity depends on the VM size of the Scale Set.
+
+On the other hand, as fewer client consume streams, the outbound bandwidth drops below a threshold at which the Auto Scaler will delete an instance (an Edge VM) from the Scale Set. This is called scaling in. There is a minimum number of instances in the Scale Set (currently 2).
+
+
+
 
 
 ## Terminating EMS machine
@@ -255,7 +270,7 @@ When you want to stop the virtual machine, fret not, all the changes remains in 
 3. or, simply click **Stop** on the virtual machine window
 4. Confirm stopping the virtual machine by clicking **Yes**
 
-​	![]({{site.baseurl}}/assets/albstop.JPG)	
+   ![]({{site.baseurl}}/assets/albstop.JPG)	
 
 
 
@@ -263,6 +278,7 @@ When you want to stop the virtual machine, fret not, all the changes remains in 
 
 - There is no Stop function for Edge Server and its instances. 
 - If the machine is stopped, the IP address of the machine will change on start.
+
 
 
 
@@ -275,7 +291,7 @@ Deleting the EMS virtual machine will remove all the changes and the virtual mac
 3. or, simply click **Delete** on the virtual machine window
 4. Choose if you want to delete or keep the attached disk
 
-​	![]({{site.baseurl}}/assets/albdelete.jpg)
+   ​![]({{site.baseurl}}/assets/albdelete.jpg)
 
 
 
@@ -283,6 +299,6 @@ Deleting the EMS virtual machine will remove all the changes and the virtual mac
 
 - For Edge, you need to stop the instances. Just go under the Instances menu and you will find all the running instances in your Edge Server.
 
-​		![]({{site.baseurl}}/assets/albdeleteedge.JPG)	
+  ​	![]({{site.baseurl}}/assets/albdeleteedge.JPG)	
 
 - Another edge instance will be created when one is deleted. For the two initial edge only.

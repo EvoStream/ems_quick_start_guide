@@ -37,11 +37,11 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
 2. Click on **GET IT NOW**
 
-3. Select the load balancer plan for the virtual machine to be created. Click on **Continue** button.
+3. Select the load balancer plan for the virtual machine to be created. Click on **Continue**.
 
-   ![]({{site.baseURL}}/assets/create_ubuntu.jpg)
+   ![]({{site.baseurl}}/assets/create_ubuntu.jpg)
 
-   ​
+   
 
    **Image available:**
 
@@ -54,17 +54,10 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    A. Basics - configure basic settings
 
    - Unique Suffix
-
    - Username
-
-   - SSH public key
-
-     ​	**Note:** Click [here](https://docs.microsoft.com/en-us/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys) to know how to create a SSH public key.
-
+   - SSH public key   *Click [here](https://docs.microsoft.com/en-us/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys) to know how to create a SSH public key.*
    - Subscription
-
    - Resource Group
-
    - Location
 
    B. VM Configuration - configure the VMs
@@ -72,7 +65,7 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    - VM Size 
    - HTTP password
    - Confirm password
-
+   ​
 5. Review the Settings, Offer Details and Terms of Use then click **Purchase** to start the deployment
 
 6. To check if the image has been created, on the Microsoft Azure Dashboard, click on the **Virtual machines**. You will now see the image created once the deployment succeeded.

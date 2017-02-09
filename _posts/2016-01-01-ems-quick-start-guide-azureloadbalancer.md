@@ -15,10 +15,6 @@ This template will provide you with a flexible an scalable Origin-Edge distribut
 
 A Stream Manager virtual machine is used to manage the distributions of streams between origin and edge.
 
-![]({{site.baseURL}}/assets/azure.png)
-
-
-
 For more information with Azure Load Balancer, see documentation [here](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview).
 
 
@@ -37,13 +33,13 @@ For more information with Azure Load Balancer, see documentation [here](https://
 
 To get started with the EvoStream Media Server (EMS) on Azure, the first thing to do is to setup the virtual machine by simply following these steps:
 
-1. Search for the EvoStream Media Server in the Azure marketplace, or simply follow this [link]().
+1. Search for the EvoStream Media Server in the Azure marketplace, or simply follow this [link](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/evostream-inc.evostream-media-server).
 
-   ​
+2. Click on **GET IT NOW**
 
-2. Select the operating system for the virtual machine to be created. Click on **Create Virtual Machine** button.
+3. Select the load balancer plan for the virtual machine to be created. Click on **Continue** button.
 
-   ![]({{site.baseURL}}/assets/createVM.JPG)
+   ![]({{site.baseURL}}/assets/create_ubuntu.jpg)
 
    ​
 
@@ -53,7 +49,7 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
    ​
 
-3. Configure the virtual machine settings based on your preferences:
+4. Configure the virtual machine settings based on your preferences:
 
    A. Basics - configure basic settings
 
@@ -77,9 +73,9 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    - HTTP password
    - Confirm password
 
-4. Review the Settings, Offer Details and Terms of Use then click **Purchase** to start the deployment
+5. Review the Settings, Offer Details and Terms of Use then click **Purchase** to start the deployment
 
-5. To check if the image has been created, on the Microsoft Azure Dashboard, click on the **Virtual machines**. You will now see the image created once the deployment succeeded.
+6. To check if the image has been created, on the Microsoft Azure Dashboard, click on the **Virtual machines**. You will now see the image created once the deployment succeeded.
 
    You should have these machines after creation:
 
@@ -89,9 +85,12 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
    1 Edge (with two instances)
 
+   1 Load Balancer
+
    | Virtual Machine              | List in Resource Group                   |
    | ---------------------------- | ---------------------------------------- |
    | Stream Manager, Origin, Edge | ![]({{site.baseurl}}/assets/albset.JPG)  |
+   | Load Balancer                | ![]({{site.baseurl}}/assets/albLB.jpg)   |
    | Edge instances               | ![]({{site.baseurl}}/assets/albedge.JPG) |
 
    ​
@@ -161,7 +160,7 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 
 
-#### Connecting via SSH from Linux Terminal
+#### A. Connecting via SSH from Linux Terminal
 
 1.  Send command: 
 
@@ -194,7 +193,6 @@ To start anything for your project, what you need to access is the <u>Origin Ser
     1 update is a security update.
 
 
-
     The programs included with the Ubuntu system are free software;
     the exact distribution terms for each program are described in the
     individual files in /usr/share/doc/*/copyright.
@@ -209,10 +207,15 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 3. Check if EMS is running by sending `ps -e|grep evo`
 
-    1912 ?        00:00:00 evostreamms
-    1913 ?        00:00:00 evo-webserver
+   ```
+   1912 ?        00:00:00 evostreamms
+   1913 ?        00:00:00 evo-webserver
+   ```
+
 
 ​	**You are now connected to EMS!**
+
+
 
    **Notes:** 
 
@@ -223,7 +226,7 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 
 
-#### Connecting  via SSH from Windows (PuTTy)
+#### B. Connecting  via SSH using PuTTy
 
 **Pre-requisites:**
 
@@ -233,15 +236,13 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 
 
-##### A. Key File Conversion
+#### **B.1. Key File Conversion**
 
-EvoStream Media Server configuration can be accomplished using SSH and a client. Public AMI instances use a public/private key pair to log in instead of a password. The public key half of this pair is embedded in your instance, allowing you to use the private key half to log in securely without a password.
+On Windows® operating systems, you can open a secure session to your Azure instance by using the PuTTY Secure Shell client, which you can download [here](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
 
-On Windows® operating systems, you can open a secure session to your Amazon EC2 instance by using the PuTTY Secure Shell client, which you can download from:
+The first thing you’ll need to do is convert the private key. The PuTTY Secure Shell client doesn’t natively support the private key format generated in the given link above. 
 
-[*http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html*](http://www.chiark.greenend.org.uk/)
-
-The first thing you’ll need to do is convert the private key. The PuTTY Secure Shell client doesn’t natively support the private key format generated by Amazon EC2. Fortunately, PuTTY has a tool called PuTTYgen that you can use to convert your private key to the required PuTTY Private Key File (*.ppk) format. To convert the [key-pairname].pem file that you created to a [key-pair-name].ppk file, do the following:
+PuTTY has a tool called PuTTYgen that you can use to convert your private key to the required PuTTY Private Key File (*.ppk) format. To convert the private key file that you created to a [key-pair-name].ppk file, do the following:
 
 1. Run **PuTTY Key Generator**
 2. Click **Load** button
@@ -250,9 +251,9 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
 
 
 
-3. Select and open the **.pem file** that you want to convert in the Load private key window.
+3. Select and open the **private key file** that you want to convert in the Load private key window.
 
-   **Note:** You'll need to select the All Files option in the File filter drop-down list to see PEM files in the file list.
+   **Note:** You'll need to select the All Files option in the File filter drop-down list to see private key files in the file list.
 
 4. Click **OK** in the PuTTYgen Notice window
 
@@ -264,7 +265,7 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
 
 
 
-##### B. Connecting via SSH
+#### **B.2. Connecting via SSH**
 
 
 1. Run **PuTTY**
@@ -306,6 +307,8 @@ The first thing you’ll need to do is convert the private key. The PuTTY Secure
 8. You are now connected to the machine! 
 
    **Note:** The license is already installed and is placed in `/etc/evostreamms`.
+
+
 
 
 

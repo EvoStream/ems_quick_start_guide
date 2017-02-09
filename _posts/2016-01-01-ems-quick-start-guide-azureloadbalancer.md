@@ -15,7 +15,7 @@ This template will provide you with a flexible an scalable Origin-Edge distribut
 
 A Stream Manager virtual machine is used to manage the distributions of streams between origin and edge.
 
-![]({{site.baseURL}}/assets/azure.JPG)
+![]({{site.baseURL}}/assets/azure.png)
 
 
 
@@ -37,9 +37,7 @@ For more information with Azure Load Balancer, see documentation [here](https://
 
 To get started with the EvoStream Media Server (EMS) on Azure, the first thing to do is to setup the virtual machine by simply following these steps:
 
-1. Search for the EvoStream Media Server in the Azure marketplace, or simply follow this link: 
-
-   https://azure.microsoft.com/en-us/marketplace/partners/evostream-inc/evostream-media-server/
+1. Search for the EvoStream Media Server in the Azure marketplace, or simply follow this [link]().
 
    ​
 
@@ -60,16 +58,22 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    A. Basics - configure basic settings
 
    - Unique Suffix
+
    - Username
+
+   - SSH public key
+
+     ​	**Note:** Click [here](https://docs.microsoft.com/en-us/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys) to know how to create a SSH public key.
+
    - Subscription
+
    - Resource Group
+
    - Location
 
    B. VM Configuration - configure the VMs
 
    - VM Size 
-   - Admin password
-   - Confirm password
    - HTTP password
    - Confirm password
 
@@ -159,34 +163,63 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 #### Connecting via SSH from Linux Terminal
 
-1. Send command: 
+1.  Send command: 
 
-   ``` 
-   ssh <username>@<OriginServer_IPaddress>
-   ```
+    ``` 
+    ssh -1 <private_keyname> <username>@<OriginServer_IPaddress>
+    ```
 
-   **Note:** The username and password is set in step 3 on the setup above.
+    **Note:** You should be in the path of the private key.
 
-   ``` 
-   user@ubuntu:~/Desktop$ ssh user@11.221.105.202
+    ``` 
+    user@ubuntu:~/Desktop$ ssh -1 evostreamkey user@11.221.105.202
 
-   The authenticity of host '111.221.105.202 (111.221.105.202)' can't be established.
-   RSA key fingerprint is ae:02:ee:41:ff:38:96:ab:78:7b:3a:e6:09:ed:1f:4c.
-   Are you sure you want to continue connecting (yes/no)? 
-   ```
+    The authenticity of host '111.221.105.202 (111.221.105.202)' can't be established.
+    ECDSA key fingerprint is 3c:1b:60:14:c0:5c:24:ab:9e:63:20:66:87:6c:12:b0.
+    Are you sure you want to continue connecting (yes/no)? yes
+    ```
 
-2. Input “**yes**”, press **Enter**
+2.  Input “**yes**”, press **Enter**
 
-   ``` 
-   Warning: Permanently added '111.221.105.202' (RSA) to the list of known hosts.
-   user@111.221.105.202's password:
-   ```
+    ``` 
+    Warning: Permanently added '111.221.105.202' (ECDSA) to the list of known hosts.
+    Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-28-generic x86_64)
 
-3. Enter password, press **Enter**. A welcome note will open.
+    * Documentation:  https://help.ubuntu.com/
 
-   ​![]({{site.baseurl}}/assets/loggedin.JPG)
+     Get cloud support with Ubuntu Advantage Cloud Guest:
+       http://www.ubuntu.com/business/services/cloud
+       
+    15 packages can be updated.
+    1 update is a security update.
 
-**Note:** The license is already installed and is placed in `/etc/evostreamms` for Linux.
+
+
+    The programs included with the Ubuntu system are free software;
+    the exact distribution terms for each program are described in the
+    individual files in /usr/share/doc/*/copyright.
+
+    Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+    applicable law.
+
+    To run a command as administrator (user "root"), use "sudo <command>".
+    See "man sudo_root" for details.
+    ```
+
+
+3. Check if EMS is running by sending `ps -e|grep evo`
+
+    1912 ?        00:00:00 evostreamms
+    1913 ?        00:00:00 evo-webserver
+
+​	**You are now connected to EMS!**
+
+   **Notes:** 
+
+- The license is already installed and is placed in `/etc/evostreamms` for Linux.
+
+- Number of EMS instance depends on the VM size.
+
 
 
 
@@ -195,7 +228,43 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 **Pre-requisites:**
 
 - PuTTY Secure Shell Client
+- PuTTY Generator
 
+
+
+
+##### A. Key File Conversion
+
+EvoStream Media Server configuration can be accomplished using SSH and a client. Public AMI instances use a public/private key pair to log in instead of a password. The public key half of this pair is embedded in your instance, allowing you to use the private key half to log in securely without a password.
+
+On Windows® operating systems, you can open a secure session to your Amazon EC2 instance by using the PuTTY Secure Shell client, which you can download from:
+
+[*http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html*](http://www.chiark.greenend.org.uk/)
+
+The first thing you’ll need to do is convert the private key. The PuTTY Secure Shell client doesn’t natively support the private key format generated by Amazon EC2. Fortunately, PuTTY has a tool called PuTTYgen that you can use to convert your private key to the required PuTTY Private Key File (*.ppk) format. To convert the [key-pairname].pem file that you created to a [key-pair-name].ppk file, do the following:
+
+1. Run **PuTTY Key Generator**
+2. Click **Load** button
+
+![]({{site.baseurl}}/assets/image14.jpg)
+
+
+
+3. Select and open the **.pem file** that you want to convert in the Load private key window.
+
+   **Note:** You'll need to select the All Files option in the File filter drop-down list to see PEM files in the file list.
+
+4. Click **OK** in the PuTTYgen Notice window
+
+   ![]({{site.baseurl}}/assets/image15.png)
+
+5. Click **Save private key** and save the file with the name **\[key-pair-name\].ppk**.
+
+
+
+
+
+##### B. Connecting via SSH
 
 
 1. Run **PuTTY**
@@ -220,20 +289,23 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
    ​
 
-4. Click **Open**
+4. Select **Auth** under **Connection > SSH** in category tree
 
-5. Click  **Yes** to accept the security key on the PuTTy Security Alert Window
+5. Click the **Browse** button to find and open the **\[key-pair-name\].ppk** file
 
-6. Enter the username's password, hit **Enter**
+   ![]({{site.baseurl}}/assets/image18.jpg)
 
-   ``` 
-   Using username "EvoStream".
-   EvoStream@111.221.105.202's password: 
-   ```
+   **Note:** If you will be opening this same session later, you can save it for future use
 
-7. You are now connected to the machine! 
+6. Click **Open**
 
-   **Note:** The license is already installed and is placed in `/etc/evostreamms` for Linux.
+   ![]({{site.baseurl}}/assets/image20.png)
+
+7. Click  **Yes** to accept the security key on the PuTTy Security Alert Window
+
+8. You are now connected to the machine! 
+
+   **Note:** The license is already installed and is placed in `/etc/evostreamms`.
 
 
 
@@ -291,7 +363,7 @@ Deleting the EMS virtual machine will remove all the changes and the virtual mac
 3. or, simply click **Delete** on the virtual machine window
 4. Choose if you want to delete or keep the attached disk
 
-   ​![]({{site.baseurl}}/assets/albdelete.jpg)
+   ![]({{site.baseurl}}/assets/albdelete.JPG)
 
 
 

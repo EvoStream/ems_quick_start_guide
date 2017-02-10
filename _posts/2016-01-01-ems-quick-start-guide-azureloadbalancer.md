@@ -1,5 +1,5 @@
 ---
-title: Quick Start Guide for Microsoft Azure
+title: Quick Start Guide for Microsoft Azure Load Balancer
 layout: post
 date:   2016-01-01 00:00:00 +0000
 categories: jekyll update
@@ -41,11 +41,10 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
    ![]({{site.baseurl}}/assets/create_ubuntu.jpg)
 
-   
 
    **Image available:**
 
-   - EvoStream Media Server for Ubuntu - Ubuntu 16.04 64-bit
+- EvoStream Media Server for Ubuntu - Ubuntu 16.04 64-bit
 
    ​
 
@@ -65,7 +64,7 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
    - VM Size 
    - HTTP password
    - Confirm password
-   ​
+     ​
 5. Review the Settings, Offer Details and Terms of Use then click **Purchase** to start the deployment
 
 6. To check if the image has been created, on the Microsoft Azure Dashboard, click on the **Virtual machines**. You will now see the image created once the deployment succeeded.
@@ -173,9 +172,9 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 2.  Input “**yes**”, press **Enter**
 
-    ``` 
-    Warning: Permanently added '111.221.105.202' (ECDSA) to the list of known hosts.
-    Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-28-generic x86_64)
+     ``` 
+     Warning: Permanently added '111.221.105.202' (ECDSA) to the list of known hosts.
+     Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-28-generic x86_64)
 
     * Documentation:  https://help.ubuntu.com/
 
@@ -184,8 +183,9 @@ To start anything for your project, what you need to access is the <u>Origin Ser
        
     15 packages can be updated.
     1 update is a security update.
+     ```
 
-
+    ```
     The programs included with the Ubuntu system are free software;
     the exact distribution terms for each program are described in the
     individual files in /usr/share/doc/*/copyright.
@@ -196,6 +196,9 @@ To start anything for your project, what you need to access is the <u>Origin Ser
     To run a command as administrator (user "root"), use "sudo <command>".
     See "man sudo_root" for details.
     ```
+
+
+
 
 
 3. Check if EMS is running by sending `ps -e|grep evo`
@@ -212,7 +215,7 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
    **Notes:** 
 
-- The license is already installed and is placed in `/etc/evostreamms` for Linux.
+- The license is already installed and is placed in `/etc/evostreamms`.
 
 - Number of EMS instance depends on the VM size.
 
@@ -319,11 +322,43 @@ The Ingest side consists of an Origin server (a Virtual Machine or VM with EMS).
 At the Ingest side, when a stream is ingested by the Origin server, the Stream Manager will be notified of a stream creation event. The SM will then ask each Edge server (each instance in the Scale Set) to pull the stream from the Origin server as an RTMP stream.
 At the Delivery side, when a client plays or pulls a stream, the Load Balancer randomly selects an available Edge server in the Scale Set to serve the requested stream to the client.
 
-As more clients consume streams, the outbound bandwidth reaches a threshold at which the Autoscaler will add a new instance (an Edge VM) to the Scale Set. This is called scaling out. There is a maximum number of instances in the Scale Set (currently 5). The maximum bandwidth capacity depends on the VM size of the Scale Set.
-
-On the other hand, as fewer client consume streams, the outbound bandwidth drops below a threshold at which the Auto Scaler will delete an instance (an Edge VM) from the Scale Set. This is called scaling in. There is a minimum number of instances in the Scale Set (currently 2).
 
 
+### Scale In and Scale Out
+
+As more clients consume streams, the outbound bandwidth reaches a threshold at which the Autoscaler will add a new instance (an Edge VM) to the Scale Set. This is called **scaling out**. There is a maximum number of instances in the Scale Set (currently 5). The maximum bandwidth capacity depends on the VM size of the Scale Set.
+
+On the other hand, as fewer client consume streams, the outbound bandwidth drops below a threshold at which the Auto Scaler will delete an instance (an Edge VM) from the Scale Set. This is called **scaling in**. There is a minimum number of instances in the Scale Set (currently 2).
+
+
+
+### Pushing Stream to Origin
+
+First things first after VM deployment is to push a stream or streams into your Origin machine.  You can push a stream using other EMS or other third party media players.
+
+To check on the Origin machine's IP address, go to your resource group > check for the origin virtual machine > click on Overview. You can find the public IP address in this page.
+
+![]({{site.baseurl}}/assets/albOriginIP.JPG)	
+
+
+
+#### Pushing stream using EMS
+
+If you wished to push a stream to your origin machine using EMS, you need to know the destination address and localstreamname of the source to be pushed then send this command:
+
+```
+pushStream uri=rtmp://Origin_IPAddress/live localStreamname=<localStreamname> targetStreamName=<targetStreamName>
+```
+
+You may check if the stream if successfully pushed to the Origin server [here](http://ers.evostream.com:5050/demo/evoplayersv5.html).
+
+Just enter the Origin's IP address and the localStreamName of the stream and hit **Play**.
+
+![]({{site.baseurl}}/assets/albhtml5.JPG)	
+
+
+
+To know more about `pushStream` API, click [here](http://docs.evostream.com/ems_api_definition/pushstream).
 
 
 

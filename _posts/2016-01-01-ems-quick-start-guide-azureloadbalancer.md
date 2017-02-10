@@ -172,15 +172,15 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 2.  Input “**yes**”, press **Enter**
 
-       ``` 
-     Warning: Permanently added '111.221.105.202' (ECDSA) to the list of known hosts.
-     Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-28-generic x86_64)
+    ```
+    Warning: Permanently added '111.221.105.202' (ECDSA) to the list of known hosts.
+    Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-28-generic x86_64)
 
-    * Documentation:  https://help.ubuntu.com/
+      Documentation:  https://help.ubuntu.com/
 
     Get cloud support with Ubuntu Advantage Cloud Guest:
     http://www.ubuntu.com/business/services/cloud
-       
+
     15 packages can be updated.
     1 update is a security update.
 
@@ -193,11 +193,7 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
     To run a command as administrator (user "root"), use "sudo <command>".
     See "man sudo_root" for details.
-       ```
-
-
-
-
+    ```
 
 
 3. Check if EMS is running by sending `ps -e|grep evo`

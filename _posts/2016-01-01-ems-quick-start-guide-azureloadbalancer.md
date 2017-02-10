@@ -54,7 +54,7 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
    - Unique Suffix
    - Username
-   - SSH public key   *Click [here](https://docs.microsoft.com/en-us/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys) to know how to create a SSH public key.*
+   - SSH public key            ~*Click [here](https://docs.microsoft.com/en-us/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys) to know how to create a SSH public key.*~
    - Subscription
    - Resource Group
    - Location
@@ -172,20 +172,18 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
 2.  Input “**yes**”, press **Enter**
 
-     ``` 
+       ``` 
      Warning: Permanently added '111.221.105.202' (ECDSA) to the list of known hosts.
      Welcome to Ubuntu 16.04 LTS (GNU/Linux 4.4.0-28-generic x86_64)
 
     * Documentation:  https://help.ubuntu.com/
 
-     Get cloud support with Ubuntu Advantage Cloud Guest:
-       http://www.ubuntu.com/business/services/cloud
+    Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
        
     15 packages can be updated.
     1 update is a security update.
-     ```
 
-    ```
     The programs included with the Ubuntu system are free software;
     the exact distribution terms for each program are described in the
     individual files in /usr/share/doc/*/copyright.
@@ -195,7 +193,8 @@ To start anything for your project, what you need to access is the <u>Origin Ser
 
     To run a command as administrator (user "root"), use "sudo <command>".
     See "man sudo_root" for details.
-    ```
+       ```
+
 
 
 

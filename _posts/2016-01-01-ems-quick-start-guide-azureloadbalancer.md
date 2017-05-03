@@ -39,7 +39,7 @@ To get started with the EvoStream Media Server (EMS) on Azure, the first thing t
 
 3. Select the load balancer plan for the virtual machine to be created. Click on **Continue**.
 
-   ![]({{site.baseurl}}/assets/create_ubuntu.jpg)
+   ![]({{site.baseurl}}/assets/hllbt.jpg)
 
 
    **Image available:**

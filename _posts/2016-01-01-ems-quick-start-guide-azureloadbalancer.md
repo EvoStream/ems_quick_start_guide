@@ -33,7 +33,7 @@ For more information with Azure Load Balancer, see documentation [here](https://
 
 To get started with the EvoStream Media Server (EMS) on Azure, the first thing to do is to setup the virtual machine by simply following these steps:
 
-1. Search for the EvoStream Media Server in the Azure marketplace, or simply follow this [link](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/evostream-inc.evostream-media-server).
+1. Search for the EvoStream Media Server in the Azure marketplace, or simply follow this [link](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/evostream-inc.html5-low-latency-broadcast?tab=Overview).
 
 2. Click on **GET IT NOW**
 

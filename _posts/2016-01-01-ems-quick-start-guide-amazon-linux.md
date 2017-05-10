@@ -3,7 +3,7 @@ title: Quick Start Guide for Amazon Web Services - Linux
 layout: post
 date:   2016-01-01 00:00:00 +0000
 categories: jekyll update
-permalink: quick_start_guide_for_amazon_linux
+permalink: quick_start_guide_for_amazon
 ---
 
 ## Purpose
